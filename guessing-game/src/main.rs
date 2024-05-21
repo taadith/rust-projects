@@ -7,16 +7,32 @@ fn main() {
 
     let secret_num = rand::thread_rng() // gives us rng of local thread
         .gen_range(1..=100);    // [1,100]
+    
+    loop{
+        println!("please input your guess: ");
 
-    println!("secret number: {secret_num}");
+        let mut guess = String::new();  // mutable/modifiable data
 
-    println!("please input your guess: ");
+        io::stdin() // returns handle to the std input for terminal
+            .read_line(&mut guess)  // gets input from the user and stores in guess
+            .expect("failed to read the line"); // checks for successful operation
 
-    let mut guess = String::new();  // mutable/modifiable data
+        // trim removes whitespace from the beginning and end
+        // parse converts a String to another type (hint - ": u32")
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue
+        };
 
-    io::stdin() // returns handle to the std input for terminal
-        .read_line(&mut guess)  // gets input from the user and stores in guess
-        .expect("failed to read the line"); // checks for successful operation
+        println!("you guessed: {guess}");
 
-    println!("you guessed: {guess}");
+        match guess.cmp(&secret_num) {
+            Ordering::Less => println!("too small!"),
+            Ordering::Greater => println!("too big!"),
+            Ordering::Equal => {
+                println!("you win!");
+                break;
+            }
+        }
+    }
 }
