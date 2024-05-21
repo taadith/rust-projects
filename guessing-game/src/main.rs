@@ -1,7 +1,14 @@
 use std::io;    // for standard user input/output
+use rand::Rng;  // Rng trait defines methods for rng
+use std::cmp::Ordering; // used for comparing
 
 fn main() {
     println!("guess the number!");
+
+    let secret_num = rand::thread_rng() // gives us rng of local thread
+        .gen_range(1..=100);    // [1,100]
+
+    println!("secret number: {secret_num}");
 
     println!("please input your guess: ");
 
