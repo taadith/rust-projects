@@ -1,9 +1,9 @@
 use std::io;    // inclues ability to accept user input
 
 fn main() {
-    println!("Guess the number!");
+    println!("guess the number!");
 
-    println!("Please input your guess.");
+    println!("please input your guess");
 
     // guess is a mutable variable
     let mut guess: String = String::new();
