@@ -1,16 +1,34 @@
-use std::io;    // inclues ability to accept user input
+use std::io;    // includes ability to accept user input
+use rand::Rng;
+use std::cmp::Ordering;
 
 fn main() {
     println!("guess the number!");
 
-    println!("please input your guess");
+    let secret_num: u32 = rand::thread_rng().gen_range(1..=100);
 
-    // guess is a mutable variable
-    let mut guess: String = String::new();
+    loop {
+        println!("please input your guess");
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("failed to read line");
+        // guess is a mutable variable
+        let mut guess: String = String::new();
 
-    println!("you guessed: {guess}");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue
+        };
+
+        match guess.cmp(&secret_num) {
+            Ordering::Less => println!("{guess} is too small"),
+            Ordering::Greater => println!("{guess} is too big"),
+            Ordering::Equal => {
+                println!("{guess} is the correct number, you win!!!");
+                break;
+            }
+        }
+    }
 }
