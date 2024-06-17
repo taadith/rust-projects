@@ -1,6 +1,4 @@
 use std::io;
-
-use chrono::offset::MappedLocalTime;
 use chrono::prelude::*;
 
 fn main() {
