@@ -8,7 +8,7 @@ fn main() {
     let n: usize = n.trim().parse().expect("expected an unsigned integer");
 
     let mut birthdays: Vec<(usize, usize, usize)> = Vec::new();
-    for _i in 0..n {
+    for _ in 0..n {
         let mut birthday: String = String::new();
         cin.read_line(&mut birthday).expect("failed to read line for values");
         let birthday: Vec<usize> = birthday.trim()
