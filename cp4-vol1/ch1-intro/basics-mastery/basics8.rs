@@ -16,6 +16,11 @@ fn generate_subsets(n: usize) {
 }
 
 fn main() {
-    let n: String = 
-    generate_subsets(3);
+    let cin = io::stdin();
+
+    let mut n: String = String::new();
+    cin.read_line(&mut n).expect("failed to read line for n");
+    let n: usize = n.trim().parse().expect("expected an unsigned integer");
+
+    generate_subsets(n);
 }
